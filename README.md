@@ -1,4 +1,4 @@
-# Set-up
+# Set-up TensorFlow
 ## Using Docker
 ### Using a Jupyter Notebook container
 We will use a [`jupyter-minimal`](https://hub.docker.com/r/jupyter/minimal-notebook/tags/) docker image to run Jupyter Notebook locally. It comes with many packages already installed.
@@ -31,9 +31,13 @@ And voilà! You can now import `TensorFlow` in your notebook.
 An easier way would be to use a `TensorFlow` [Docker image](https://hub.docker.com/r/tensorflow/tensorflow/) directly.
 
 ```
- $ docker pull tensorflow/tensorflow:latest  # Download latest stable image
- $ docker run -it -p 8888:8888 tensorflow/tensorflow:latest-jupyter  # Start Jupyter server
+ # Download image and start jupyter server
+ # Also make current local directory visible inside the container
+ $ docker run -it --rm -v $(pwd):/tf/notebooks -p 8888:8888 tensorflow/tensorflow:latest-jupyter
 ```
+
+To install additional packages, enter the Docker container using its ID as shown above.
+
 ## In a local Python virtual env
 Start by updating `pip`, then installing tha package:
 ```
@@ -44,4 +48,15 @@ pip install tensorflow
 ```
 ## Using Google Colab
 
-If you do not wish to set up anything at all, use [Google Colab](https://colab.research.google.com/notebooks/welcome.ipynb)
+If you do not wish to set up anything at all, use [Google Colab.](https://colab.research.google.com/notebooks/welcome.ipynb)
+
+# Additional libraries
+
+| `pydot` to visualize the neural nets
+```
+$ pip install pydot
+```
+|`graphviz` because `pydot`depends on it
+```
+$ pip install graphviz
+```
